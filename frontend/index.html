@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher</title>
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=59881&format=png&color=228BE6" type="png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-content">
+            <a href="#" class="nav-brand">
+                <i class="fas fa-rocket"></i>
+                Resume Matcher
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#docs" class="nav-link">Docs</a>
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">Check resume-job fit instantly</h1>
+        <p class="hero-subtitle">Compare how well a resume aligns with a job description using skills and text similarity</p>
+        <div class="hero-cta">
+            <button class="btn btn-primary" onclick="document.getElementById('app').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-zap"></i>
+                Start Matching
+            </button>
+            <a href="#learn-more" class="btn btn-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Main App -->
+    <div class="container" id="app">
+        <div class="grid-2">
+            <!-- Left Column -->
+            <div>
+                <!-- Job Description -->
+                <div class="card">
+                    <div class="card-label">Job Description</div>
+                    <textarea id="jobDescription" placeholder="For e.g. We are looking for a Backend / Machine Learning Engineer to build and maintain data-driven applications.
+The role involves developing backend services, integrating machine learning models, and working with structured data." rows="8"></textarea>
+                </div>
+
+                <!-- Upload Box with Corner Brackets -->
+                <div class="upload-box" style="margin-top: 2rem;">
+                    <label class="upload-label">Upload Resumes</label>
+                    <p class="upload-helper">Supports .txt files • Multiple uploads allowed</p>
+                    
+                    <div class="upload-input-wrapper">
+                        <input type="file" id="resumeInput" class="upload-input" accept=".txt" multiple>
+                    </div>
+                    
+                    <!-- Files List -->
+                    <div id="fileList" class="file-list"></div>
+
+                    <!-- Clear Files Action -->
+                    <button id="clearFilesBtn" class="clear-files-action" style="display: none;">
+                        <i class="fas fa-trash"></i>
+                        <span>Clear all files</span>
+                    </button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button id="rankButton" class="btn btn-primary" style="flex: 1;">
+                        <i class="fas fa-fire"></i>
+                        Analyze Resumes
+                    </button>
+                    <button id="clearButton" class="btn btn-secondary" style="flex: 1;">
+                        <i class="fas fa-rotate-left"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <div class="section-title">Rankings</div>
+
+                <!-- Error Box -->
+                <div id="errorBox" class="error-box">
+                    <span class="error-text">
+                        <i class="fas fa-circle-exclamation"></i>
+                        <span id="errorText"></span>
+                    </span>
+                </div>
+
+                <!-- Results -->
+                <div id="rankingsList">
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <p class="empty-text">Add a job description and resumes to see ranked results</p>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="info-box">
+                    <div class="info-title">How It Works</div>
+                    <div class="info-text">
+                        Our algorithm analyzes technical skill overlap and contextual relevance to identify alignment. Results are ranked by overall fit score.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Docs Section -->
+    <section id="docs" class="docs-section">
+        <div class="container">
+            <div class="docs-header">
+                <h2 class="section-title-large">Documentation</h2>
+                <p class="docs-subtitle">Everything you need to know about Resume Matcher</p>
+            </div>
+
+            <div class="docs-container">
+                <!-- What does this tool do -->
+                <div class="docs-card">
+                    <h3 class="docs-card-title">
+                        <i class="fas fa-circle-question"></i>
+                        What does this tool do?
+                    </h3>
+                    <ul class="docs-list">
+                        <li>Ranks resumes based on how well they align with a given job description</li>
+                        <li>Compares skills and overall text content to produce a relative relevance score</li>
+                        <li>Helps compare resumes—not to make hiring decisions</li>
+                    </ul>
+                </div>
+
+                <!-- How does the matching work -->
+                <div class="docs-card">
+                    <h3 class="docs-card-title">
+                        <i class="fas fa-cogs"></i>
+                        How does the matching work?
+                    </h3>
+                    <div class="docs-subsection">
+                        <h4 class="docs-subtitle-small">Skill Overlap</h4>
+                        <ul class="docs-list">
+                            <li>Extracts predefined technical skills from both the job description and the resume</li>
+                            <li>Measures how many required skills are present</li>
+                        </ul>
+                    </div>
+                    <div class="docs-subsection">
+                        <h4 class="docs-subtitle-small">Text Similarity</h4>
+                        <ul class="docs-list">
+                            <li>Compares the overall content of the resume and job description</li>
+                            <li>Captures alignment even when wording differs</li>
+                        </ul>
+                    </div>
+                    <p class="docs-note">These signals are combined into a single score used for ranking.</p>
+                </div>
+
+                <!-- What does the score mean -->
+                <div class="docs-card">
+                    <h3 class="docs-card-title">
+                        <i class="fas fa-chart-line"></i>
+                        What does the score mean?
+                    </h3>
+                    <ul class="docs-list">
+                        <li><strong>Higher score</strong> = Resume is more aligned with the job description</li>
+                        <li><strong>Lower score</strong> = Resume and job description discuss different skills or roles</li>
+                        <li>The score is <strong>relative</strong>, not a percentage or probability</li>
+                    </ul>
+                </div>
+
+                <!-- What this tool does NOT do -->
+                <div class="docs-card warning">
+                    <h3 class="docs-card-title">
+                        <i class="fas fa-exclamation-circle"></i>
+                        What this tool does NOT do
+                    </h3>
+                    <ul class="docs-list">
+                        <li>It does not decide whether a candidate should be hired</li>
+                        <li>It does not judge candidate quality or seniority</li>
+                        <li>It does not guarantee job suitability</li>
+                        <li><strong>Human review is always required</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Interpreting the results -->
+                <div class="docs-card">
+                    <h3 class="docs-card-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Interpreting the results
+                    </h3>
+                    <div class="docs-subsection">
+                        <h4 class="docs-subtitle-small">Use the ranking to:</h4>
+                        <ul class="docs-list">
+                            <li>Compare multiple resumes against the same job description</li>
+                            <li>Identify missing or mismatched skills</li>
+                            <li>Understand why one resume ranks higher than another</li>
+                        </ul>
+                    </div>
+                    <p class="docs-caution"><i class="fas fa-warning"></i> Do not use the score as a final decision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="features-header">
+                <h2 class="section-title-large">Features of Resume Matcher</h2>
+                <p class="features-subtitle">A sophisticated approach to resume-job matching</p>
+            </div>
+            
+            <div class="features-container">
+                <!-- Feature 1 -->
+                <div class="feature-item">
+                    <div class="feature-number">01</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Resume–Job Relevance Ranking</h3>
+                        <p class="feature-item-desc">Ranks resumes based on how closely they align with a given job description. Higher-ranked resumes are more relevant to the role requirements.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-item">
+                    <div class="feature-number">02</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Hybrid Matching Approach</h3>
+                        <p class="feature-item-desc">Combines explicit skill overlap with textual similarity to avoid the limitations of pure keyword matching.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-item">
+                    <div class="feature-number">03</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Skill Match Breakdown</h3>
+                        <p class="feature-item-desc">Clearly shows matched skills and missing skills, so you can understand why a resume ranks higher or lower.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-item">
+                    <div class="feature-number">04</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Textual Similarity Analysis</h3>
+                        <p class="feature-item-desc">Uses text similarity to capture alignment even when skills are phrased differently or mentioned indirectly.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-item">
+                    <div class="feature-number">05</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Relative Scoring, Not Decisions</h3>
+                        <p class="feature-item-desc">Provides relative relevance scores, not hiring decisions. The system ranks resumes—it does not judge candidate quality or job readiness.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-item">
+                    <div class="feature-number">06</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Consistent and Reproducible Results</h3>
+                        <p class="feature-item-desc">Uses a fixed, pre-trained text representation to ensure stable and repeatable rankings across runs.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="feature-item">
+                    <div class="feature-number">07</div>
+                    <div class="feature-content">
+                        <h3 class="feature-item-title">Transparent and Explainable</h3>
+                        <p class="feature-item-desc">No black-box predictions. Every score is based on understandable signals that can be inspected and explained.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--- Learn More Section -->
+     <section id="learn-more" class="learn-more-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title-large" >Learn More Section</h2>
+                <p class="section-subtitle">Why a hybrid approach works better than simple keyword counting</p>
+            </div>
+
+            <div class="learn-more-grid">
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <h3 class="docs-card-title"><i class="fas fa-bullseye"></i> Why Not Just Keyword Matching?</h3>
+                        <ul class="docs-list">
+                            <li><strong>Misses Phrasing Variations:</strong> Fails when candidates use different terminology (e.g., "REST API" vs. "backend services").</li>
+                            <li><strong>Ignores Context:</strong> Cannot differentiate between passing familiarity and deep expertise.</li>
+                            <li><strong>Misses Hidden Experience:</strong> Fails to recognize implied skills not explicitly listed.</li>
+                        </ul>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="docs-card-title"><i class="fas fa-brain"></i> Why Combine Skill & Text Similarity?</h3>
+                        <ul class="docs-list">
+                            <li><strong>Robustness:</strong> Combines hard skill verification with semantic understanding.</li>
+                            <li><strong>Broader Alignment:</strong> Captures the full picture of experience.</li>
+                            <li><strong>Better Ranking:</strong> Delivers more realistic candidate rankings.</li>
+                        </ul>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="docs-card-title"><i class="fas fa-robot"></i> Is This Machine Learning?</h3>
+                        <ul class="docs-list">
+                            <li><strong>Yes, but Transparent:</strong> Uses statistical text representation (e.g., TF-IDF/BERT) to compare documents.</li>
+                            <li><strong>Explainable AI (XAI):</strong> Every output is traceable to specific signals within the text.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="limitations-container">
+                    <div class="docs-card warning">
+                        <h3 class="docs-card-title"><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+                        <ul class="docs-list">
+                            <li><strong>Garbage In, Garbage Out:</strong> Accuracy depends heavily on the input text quality.</li>
+                            <li><strong>Rule-Based Dependencies:</strong> Skill extraction relies on pre-defined dictionaries.</li>
+                            <li><strong>Structure Sensitivity:</strong> Scores can vary based on resume layout.</li>
+                        </ul>
+                    </div>
+                    <div class="docs-card">
+                        <h3 class="docs-card-title"><i class="fas fa-check-circle"></i> Best Use Cases</h3>
+                        <ul class="docs-list">
+                            <li>Resume screening and comparative ranking.</li>
+                            <li>Self-evaluation of resume relevance.</li>
+                            <li>Experimental and educational purposes.</li>
+                        </ul>
+                        <p class="docs-note">Note: Not intended for final, automated hiring decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="fas fa-rocket"></i>
+                <span>Resume Matcher</span>
+            </div>
+            
+            <div class="footer-made-by">
+                Made with <i class="fas fa-heart"></i> by <span class="footer-authors">Dev Keval & Veer</span>
+            </div>
+            
+            <div class="footer-info">
+                <p class="footer-copyright">© 2026 Resume Matcher. All rights reserved.</p>
+                <p class="footer-disclaimer">This tool is for comparative analysis only and should not be used as the sole basis for hiring decisions.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="ml_logic.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
