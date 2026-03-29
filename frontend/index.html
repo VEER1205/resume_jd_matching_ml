@@ -49,17 +49,24 @@
                 <!-- Job Description -->
                 <div class="card">
                     <div class="card-label">Job Description</div>
-                    <textarea id="jobDescription" placeholder="For e.g. We are looking for a Backend / Machine Learning Engineer to build and maintain data-driven applications.
-The role involves developing backend services, integrating machine learning models, and working with structured data." rows="8"></textarea>
+                    <textarea id="jobDescription" placeholder="Role: Backend / ML Engineer&#10;&#10;Requirements:&#10;• Strong Python programming&#10;• Experience building REST APIs&#10;• Familiarity with machine learning concepts&#10;• Experience with data preprocessing and model deployment&#10;• Knowledge of FastAPI or Flask preferred" rows="8"></textarea>
                 </div>
 
                 <!-- Upload Box with Corner Brackets -->
                 <div class="upload-box" style="margin-top: 2rem;">
                     <label class="upload-label">Upload Resumes</label>
-                    <p class="upload-helper">Supports >PDF files • Multiple uploads allowed</p>
+                    <p class="upload-helper">Supports PDF files • Multiple uploads allowed</p>
                     
-                    <div class="upload-input-wrapper">
-                        <input type="file" id="resumeInput" class="upload-input" accept=".pdf" multiple>
+                    <input type="file" id="resumeInput" class="upload-input-hidden" accept=".pdf" multiple>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-area-icon">
+                            <i class="fas fa-cloud-arrow-up"></i>
+                        </div>
+                        <div class="upload-area-text">
+                            Drag & drop files here or <span>Browse Files</span>
+                        </div>
+                        <div class="upload-area-hint">PDF files only</div>
                     </div>
                     
                     <!-- Files List -->
@@ -187,6 +194,7 @@ The role involves developing backend services, integrating machine learning mode
                         <li>It does not judge candidate quality or seniority</li>
                         <li>It does not guarantee job suitability</li>
                         <li><strong>Human review is always required</strong></li>
+                        <li><strong>This tool currently works only for <u>Data Science, Web Dev and ML </u>related domains </strong></li>
                     </ul>
                 </div>
 
@@ -351,6 +359,9 @@ The role involves developing backend services, integrating machine learning mode
                 <span>Resume Matcher</span>
             </div>
             
+            <div class="footer-made-by">
+                Made with <i class="fas fa-heart"></i> by <span class="footer-authors">Dev Keval & Veer</span>
+            </div>
             
             <div class="footer-info">
                 <p class="footer-copyright">© 2026 Resume Matcher. All rights reserved.</p>
@@ -358,8 +369,6 @@ The role involves developing backend services, integrating machine learning mode
             </div>
         </div>
     </footer>
-
-    <script src="ml_logic.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
